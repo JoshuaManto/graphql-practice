@@ -81,3 +81,14 @@ module.exports = app;
 // graphql(schema, "{ info }", resolver).then(res => {
 //   console.log(res);
 // });
+
+// Queries
+
+// Simple Query
+// query {
+//   feed {
+//     id
+//     url
+//     description
+//   }
+// }
