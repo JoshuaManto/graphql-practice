@@ -7,17 +7,59 @@ const PORT = 3000;
 const app = express();
 
 // Schema
+
+// const schema = buildSchema(`
+//   type Query {
+//     users: [User!]!
+//     user(id: ID!): User
+//   }
+
+//   type Mutation {
+//     createUser(name: String!): User!
+//   }
+
+//   type User {
+//     id: ID!
+//     name: String!
+//   }
+// `);
+
 const schema = buildSchema(`
   type Query {
     info: String!
+    feed: [Link]!
+  }
+
+  type Link {
+    id: ID!
+    description: String!
+    url: String!
   }
 `);
+
+let links = [
+  {
+    id: "link-0",
+    url: "www.howtographql.com",
+    description: "Fullstack tutorial for GraphQL"
+  }
+];
 
 // Resolver
 const resolver = {
   info: () => {
-    return null;
-    // return "This is an API of a Hackernews Clone!";
+    // return null;
+    return "This is an API of a Hackernews Clone!";
+  },
+
+  feed: () => {
+    return links;
+  },
+
+  Link: {
+    id: parent => parent.id,
+    description: parent => parent.description,
+    url: parent => parent.url
   }
 };
 
